@@ -19,6 +19,10 @@ export class UserForm extends React.Component{
         this.setState({formEmail: e.target.value})
     }    
     handleAddUser(e){
+        // reset fields
+        this.refs.name.value =''
+        this.refs.email.value =''
+        
         alert('User Added')
         let userObj ={
             id: 10,
@@ -33,10 +37,10 @@ export class UserForm extends React.Component{
         return(
             <div>
                 <div>
-                    <input type='text' name='name' onChange={this.handleName}/>
+                    <input type='text' name='name' onChange={this.handleName} ref='name'/>
                 </div>
                 <div>
-                    <input type='email' name='email' onChange={this.handleEmail}/>
+                    <input type='email' name='email' onChange={this.handleEmail} ref='email'/>
                 </div>
                 <div>
                     <button name='login' onClick={this.handleAddUser} >Add User</button>
