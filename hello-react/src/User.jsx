@@ -28,7 +28,7 @@ class User extends Component{
             ],
             msg : "Welcome to Reactjs Development"
         }
-        this.handleUsers = this.handleUsers.bind(this)
+        this.handleCreateUser = this.handleCreateUser.bind(this)
     }
     clickMe(msg){
         alert(msg)
@@ -36,7 +36,6 @@ class User extends Component{
     handleCreateUser(user){
         let oldUsers = this.state.users
         oldUsers.push(user)
-        
         this.setState({
             users: oldUsers
         })
