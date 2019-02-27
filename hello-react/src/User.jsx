@@ -11,11 +11,16 @@ class User extends Component{
             msg : "Welcome to Reactjs Development"
         }
     }
+    clickMe(msg){
+        alert(msg)
+    }
     render(){
         return(
             <div>
-            <Hello msg={this.state.msg}/>
-            <Calculator first={10} next={2} action='POW'/>
+                <Hello msg={this.state.msg}/>
+                <Calculator first={10} next={2} action='POW'/>
+                <button onClick={()=>{this.setState({ msg:'Welcome to User Component'}) }} >Click Me!</button>
+                <h2>{this.state.msg}</h2>
             </div>
         )
     }

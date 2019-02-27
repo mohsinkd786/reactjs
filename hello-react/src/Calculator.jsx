@@ -2,6 +2,9 @@ import React from "react";
 
 export class Calculator extends React.Component{
     render(){
+        // Invalid statement
+        // Properties once set cant be modified
+        // this.props.action ='TEST'
         switch(this.props.action){
             case 'SUM':
                 return(
