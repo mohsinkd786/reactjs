@@ -1,0 +1,10 @@
+.user-menu{
+    list-style-type: square;
+}
+.nav-link{
+    text-decoration: none;
+    color: blue;
+}
+.nav-link-active {
+    color : red;
+}
