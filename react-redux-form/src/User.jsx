@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import logo from './logo.svg';
 import './App.css';
 import './user.css';
 
@@ -89,24 +88,24 @@ let UserForm = props => {
 const validate = val => {
   const errors = {};
   if (!val.firstName) {
-    console.log('First Name is required');
-    errors.firstName = 'Required';
+    // console.log('First Name is required');
+    errors.firstName = 'First Name is Required';
   }
   if (!val.lastName) {
-    console.log('Last Name is required');
-    errors.lastName = 'Required';
+    // console.log('Last Name is required');
+    errors.lastName = 'Last Name is Required';
   }
   if (!val.email) {
-    console.log('email is required');
-    errors.email = 'Required';
+    // console.log('email is required');
+    errors.email = 'Email is Required';
   } else if (!/^.+@.+$/i.test(val.email)) {
-    console.log('email is invalid');
+    // console.log('email is invalid');
     errors.email = 'Invalid email address';
   }
   if (!val.age) {
-    errors.age = 'Required'
+    errors.age = 'Age is Required'
   } else if (isNaN(Number(val.age))) {
-    errors.age = 'Must be a number'
+    errors.age = 'Age must be a number'
   } else if (Number(val.age) < 18) {
     errors.age = 'Sorry, you must be at least 18 years old'
   }
