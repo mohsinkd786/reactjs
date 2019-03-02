@@ -6,22 +6,25 @@ export class Users extends React.Component{
         this.state={
             rows:[],
             name:'',
-            job: ''
+            email: ''
         }
         this.handleName = this.handleName.bind(this)
-        this.handleJob = this.handleJob.bind(this)
-        
         this.handleSave = this.handleSave.bind(this)
 
-        const _url = 'https://reqres.in/api/users'
-        fetch(_url+'?page=2')
+        let _url = 'http://localhost:3010/users'
+        // in case of sending basic authentication header
+        /*fetch(_url,{
+            headers:{
+                'Authorization': 'Basic YWRtaW46MTIz'
+            }
+        })*/
+        fetch(_url)
         .then(response=>response.json())
         .then((response)=>{
-            let users = response.data.map(u=>{
+            let users = response.map(u=>{
                 return(
                     <tr key={u.id}>
-                        <td>{u.first_name},{u.last_name}</td>
-                        <td><img src={u.avatar} /></td>
+                        <td>{u.name}</td>
                     </tr>
                 )
             })
@@ -33,35 +36,27 @@ export class Users extends React.Component{
             name: e.target.value
         })
     }
-    handleJob(e){
-        this.setState({
-            job: e.target.value
-        })
-    }
-    handleSave(e){
+    async handleSave(e){
         this.refs.name =''
-        this.refs.job = ''
-        let userObj = {
-            id: 1,
-            name: 'Test'
-        }
-        fetch('http://localhost:3010/user/add',{
-            method: 'POST',
-            body: {
-                "id": 22,
-                "name" : "Mohsin"
-            },
-            headers:{ 'Access-Control-Allow-Origin':'localhost',
-                    'Content-Type':'application/json'        
-            }
-        })
-        .then(response=>response.json())
-        .then(response=>{
-            console.log('User Saved ',response)
-        }).catch(err=>{
-            console.log('Error ',err)
-        })
+
+        try{
+            let _url = 'http://localhost:3010/user/add'
+            const response = await fetch(_url,{
+                method: 'POST',
+                body: JSON.stringify({
+                    id: 1,   
+                    name: this.state.name
+                }),
+                headers: {
+                    'content-type': 'application/json'
+                      }
+                    })
+                    return await response.json();
+                    } catch (error) {
+                    console.error(error);
+                    }
     }
+
     render(){
         return(
         <div>
@@ -69,13 +64,12 @@ export class Users extends React.Component{
                 <legend>Add User</legend>
                 <form>
                     <input type="text" ref='name' onChange={this.handleName} />
-                    <input type="text" ref='job' onChange={this.handleJob}/>
                     <button onClick={this.handleSave.bind(this)} >Save User</button>
                 </form>
             </fieldset>
             Users
             <table>
-                <thead><tr><th>Name</th><th>Avatar</th></tr></thead>
+                <thead><tr><th>Name</th></tr></thead>
                 <tbody>
                     {this.state.rows}
                 </tbody>
